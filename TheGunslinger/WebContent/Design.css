@@ -2,7 +2,9 @@
 
 body
 {
-background-color:#b0c4de;
+background-image:url('MainMenu.png');
+background-repeat:no-repeat;
+background-size:cover;
 }
 
 h1
@@ -13,11 +15,16 @@ color:blue;
 a
 {
 float:left;
+background-image:url('signbackground.jpg');	
+background-size:auto;
+background-repeat:no-repeat;
 width:6em;
 text-decoration:none;
+text-align:center;
+font-size:large;
 color:white;
 background-color:purple;
-padding:0.2em 0.6em;
+padding:0.6em 0.8em;
 border-right:1px solid white;
 }
 a:hover {background-color:#ff3300;}

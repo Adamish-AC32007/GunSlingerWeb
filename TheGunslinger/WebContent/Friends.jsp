@@ -5,15 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="Design.css">
-<title>Insert title here</title>
+<title>The Gunslinger</title>
 </head>
 <body>
-<h1>The Gunslinger</h1>
 <ul>
-<li><a href="/GSWeb/Main.jsp">You</a></li>
-<li><a href="/GSWeb/Friends.jsp">Friends</a></li>
-<li><a href="/GSWeb/Global.jsp">Global</a></li>
-<li><a href="/GSWeb/Tracker.jsp">Tracker</a></li>
+<li><a href="/TheGunslinger/Main.jsp">You</a></li>
+<li><a href="/TheGunslinger/Friends.jsp">Friends</a></li>
+<li><a href="/TheGunslinger/Global.jsp">Global</a></li>
+<li><a href="/TheGunslinger/Tracker.jsp">Tracker</a></li>
 </ul>
 </body>
 </html>
