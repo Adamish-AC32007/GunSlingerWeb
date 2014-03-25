@@ -14,7 +14,11 @@ package com.example.GunSlinger.models;
  */
 
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.UUID;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -22,9 +26,11 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-
+import com.datastax.driver.core.utils.UUIDs;
 import com.example.GunSlinger.lib.*;
 import com.example.GunSlinger.stores.*;
+
+
 public class GunSlingerModel {
 	Cluster cluster;
 	public GunSlingerModel(){
@@ -35,24 +41,41 @@ public class GunSlingerModel {
 		this.cluster=cluster;
 	}
 
-	public LinkedList<GunSlingerStore> getTweets() {
-		LinkedList<GunSlingerStore> tweetList = new LinkedList<GunSlingerStore>();
-		Session session = cluster.connect("keyspace2");
+	//creates database if it doesn't exist
+	public void createDB(){
 
-		PreparedStatement statement = session.prepare("SELECT * from tweets");
-		BoundStatement boundStatement = new BoundStatement(statement);
+		Session session = cluster.connect();
+		session.execute("create keyspace if not exists playerData WITH replication = {'class':'SimpleStrategy','replication_factor':1};");
+
+		Session session1 = cluster.connect("playerData"); 	
+		session1.execute("CREATE TABLE if not exists data (username varchar,accuracy float,totalshots int, meleekills int, totalkills int, highscore int, playtime UUID, PRIMARY KEY (username,playtime)) WITH CLUSTERING ORDER BY (playtime DESC);");
+		session1.execute("CREATE TABLE if not exists friends (username varchar,friends set<varchar>, PRIMARY KEY (username))");
+		session1.execute("CREATE TABLE if not exists login (username varchar,password varchar, PRIMARY KEY (username))");
+	}
+	
+	public LinkedList<GunSlingerStore> getScores(){
+		LinkedList<GunSlingerStore> gsList= new LinkedList<GunSlingerStore>();
+		Session session = cluster.connect("playerData");
+		
+		PreparedStatement statement = session.prepare("SELECT * from data");	//create the cql statement to be executed
+		BoundStatement boundStatement = new BoundStatement(statement); 			
 		ResultSet rs = session.execute(boundStatement);
-		if (rs.isExhausted()) {
+		if (rs.isExhausted()) { 												//if the result set is empty
 			System.out.println("No Tweets returned");
-		} else {
-			for (Row row : rs) {
-				GunSlingerStore ts = new GunSlingerStore();
-				//ts.setTweet(row.getString("tweet"));
-				//ts.setUser(row.getString("user"));
-				tweetList.add(ts);
+		} else { 																//else (meaning there is more data)
+			for (Row row : rs) { 												//for each row
+				GunSlingerStore gs = new GunSlingerStore(); 					
+				gs.setUsername(row.getString("username")); 						
+				gs.setAccuracy(row.getFloat("accuracy")); 						
+				gs.setTotalshots(row.getInt("totalshots"));		
+				gs.setMeleekills(row.getInt("meleekills"));
+				gs.setTotalkills(row.getInt("totalkills"));
+				gs.setHighscore(row.getInt("highscore"));
+				gs.setPlaytime(row.getUUID("playtime"));
+				gsList.add(gs); 												
 			}
 		}
 		session.close();
-		return tweetList;
+		return gsList;
 	}
 }
