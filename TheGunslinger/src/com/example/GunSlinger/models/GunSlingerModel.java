@@ -78,4 +78,24 @@ public class GunSlingerModel {
 		session.close();
 		return gsList;
 	}
+
+	public boolean Login(String name, String password) {
+		Session session = cluster.connect("AdamDB");
+		PreparedStatement statement = session.prepare("SELECT * from login where username = ?;");
+		ResultSet rs = session.execute(statement.bind(name));
+		boolean loggedin = false;
+		if (rs.isExhausted()) {
+			System.out.println("No users returned");
+		} else {
+			for (Row row : rs) {
+				String comparepass = row.getString("password");
+				if(comparepass.equals(password)){
+					loggedin = true;
+				}
+			}
+			System.out.println("User found");
+		}
+		session.close();
+		return loggedin;
+	}
 }
