@@ -17,13 +17,13 @@
 </head>
 <body>
 	<div class="container">
-		<form class="form-signin" name="Login" action="Gun" method="post">
+		<form action="<%=request.getContextPath()%>/Gun" name="Login" method="post" class="form-signin">
 			<h3 class="form-signin-heading">Login</h3><br>
 			<input type="text" id="username" name="username" class="form-control"
 				placeholder="User Name" required autofocus><br> 
 			<input type="password" id="password" name="password" class="form-control"
 				placeholder="Password" required><br>
-			<button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign
+			<button class="btn btn-lg btn-primary btn-block" name="Login" type="submit">Sign
 				in</button>
 		</form>
 	</div>

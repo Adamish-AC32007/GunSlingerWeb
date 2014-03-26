@@ -11,10 +11,11 @@
 </head>
 <body>
 <ul>
-<li><a href="/TheGunslinger/Main.jsp">You</a></li>
-<li><a href="/TheGunslinger/Friends.jsp">Friends</a></li>
-<li><a href="/TheGunslinger/Global.jsp">Global</a></li>
-<li><a href="/TheGunslinger/Tracker.jsp">Tracker</a></li>
+<li><a href="<%=request.getContextPath()%>/Main.jsp">You</a></li>
+<li><a href="<%=request.getContextPath()%>/Friends.jsp">Friends</a></li>
+<li><a href="<%=request.getContextPath()%>/Global.jsp">Global</a></li>
+<li><a href="<%=request.getContextPath()%>/Tracker.jsp">Tracker</a></li></ul>
+
 </ul>
 
 <div>

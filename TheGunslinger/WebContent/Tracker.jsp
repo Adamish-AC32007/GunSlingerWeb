@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="Design.css">
+<link rel="stylesheet" type="text/css" href="CSS/Design.css">
 <title>The Gunslinger</title>
 </head>
 <body>
 <ul>
-<li><a href="/TheGunslinger/Main.jsp">You</a></li>
-<li><a href="/TheGunslinger/Friends.jsp">Friends</a></li>
-<li><a href="/TheGunslinger/Global.jsp">Global</a></li>
-<li><a href="/TheGunslinger/Tracker.jsp">Tracker</a></li></ul>
+<li><a href="<%=request.getContextPath()%>/Main.jsp">You</a></li>
+<li><a href="<%=request.getContextPath()%>/Friends.jsp">Friends</a></li>
+<li><a href="<%=request.getContextPath()%>/Global.jsp">Global</a></li>
+<li><a href="<%=request.getContextPath()%>/Tracker.jsp">Tracker</a></li></ul>
 </body>
 </html>
