@@ -12,6 +12,27 @@ h1
 color:blue;
 }
 
+div
+{
+	background-color: grey;
+	position: relative;
+	top: 100px;
+	left: 50px;
+	height: 500px;
+	width: 600px;
+}
+
+table, th, td
+{
+border-collapse:collapse;
+border:1px solid black;
+border-spacing: 2px;
+}
+th, td
+{
+padding:5px;
+}
+
 a
 {
 float:left;

@@ -13,7 +13,38 @@
 <li><a href="<%=request.getContextPath()%>/Friends.jsp">Friends</a></li>
 <li><a href="<%=request.getContextPath()%>/Global.jsp">Global</a></li>
 <li><a href="<%=request.getContextPath()%>/Tracker.jsp">Tracker</a></li></ul>
-
 </ul>
+
+<div>
+<table style="width:300px;">
+  <tr>
+    <th>Player Name</th>
+    <th>Highscore</th>
+    <th>Accuracy (%)</th>
+    <th>Shots Fired</th>
+    <th>Melee Kills</th>
+    <th>Total Kills</th>
+  </tr>
+<tr>
+  <td>Jill</td>
+  <td>50</td>		
+  <td>50</td>
+  <td>30</td>
+  <td>4</td>		
+  <td>5</td>
+  </tr>
+<tr>
+  <td>Eve</td>
+  <td>Jackson</td>		
+  <td>94</td>
+</tr>
+<tr>
+  <td>John</td>
+  <td>Doe</td>		
+  <td>80</td>
+</tr>
+</table>
+</div>
+
 </body>
 </html>
