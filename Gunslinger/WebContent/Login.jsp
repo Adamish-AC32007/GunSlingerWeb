@@ -30,6 +30,16 @@
 				name="Login" type="submit">Sign in</button>
 		</form>
 
-	</div>
+		<div class="container">
+			<form action="Gun" method="post" class="form-signin">
+				<h3 class="form-signin-heading">Register</h3>
+				<br> <input type="text" id="Rusername" name="Rusername"
+					class="form-control" placeholder="User Name" required><br>
+				<input type="password" id="Rpassword" name="Rpassword"
+					class="form-control" placeholder="Password" required><br>
+				<button class="btn btn-lg btn-primary btn-block" id="Register"
+					name="Register" type="submit">Register</button>
+			</form>
+		</div>
 </body>
 </html>

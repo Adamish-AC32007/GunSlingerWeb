@@ -168,6 +168,31 @@ public class GunSlingerModel {
 		session.close();
 		return loggedin;
 	}
+	
+	
+	public boolean Register(String name, String password) {
+		boolean found=false;
+		Session session = cluster.connect("playerData");
+		
+		PreparedStatement searchStatement = session.prepare("SELECT * from login where username = ?");
+		ResultSet SearchRS = session.execute(searchStatement.bind(name));
+			
+		if(SearchRS.isExhausted())
+		{
+			// username doesnt already exist
+			// so allow user to be added
+			PreparedStatement statement = session.prepare("INSERT INTO login(username, password) values (?,?);");
+			session.execute(statement.bind(name,password));	
+			found=true;
+		}
+		else
+		{
+			// username already exists in the DB
+			found=false;
+		}
+		session.close();
+		return found;
+	}
 
 	//fully working
 	//finalised
