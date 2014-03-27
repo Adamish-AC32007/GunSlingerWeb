@@ -76,7 +76,7 @@ public class Gun extends HttpServlet {
 			if (loggedin == true) {
 				session.setAttribute("UserName", Name);
 				LinkedList<GunSlingerStore> scoreList = gm.getScores(Name);			
-				request.setAttribute("Scores", scoreList);
+				request.setAttribute("PlayerScores", scoreList);
 				RequestDispatcher rd = request.getRequestDispatcher("/Main.jsp");
 				rd.forward(request, response);
 			} else {
@@ -139,7 +139,14 @@ public class Gun extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Tracker.jsp");
 			rd.forward(request, response);
 		}
-
-
+		else if(request.getParameter("addFriend")!=null)
+		{
+			String friend = request.getParameter("enterFriend");
+			
+			gm.addFriend(Name,friend);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/Friends.jsp");
+			rd.forward(request, response);
+		}
 	}
 }

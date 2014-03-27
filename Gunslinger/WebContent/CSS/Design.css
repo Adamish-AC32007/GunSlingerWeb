@@ -38,6 +38,7 @@ table.hovertable {
 	border-width: 1px;
 	border-color: #999999;
 	border-collapse: collapse;
+	width:100%;
 }
 
 table.hovertable th {
@@ -59,9 +60,14 @@ table.hovertable td {
 	border-color: #a9c6c9;
 }
 
+table,th,td {
+	width: 100%;
+	border: 1px solid black;
+}
+
 input {
-	float: left;
-	background-image: url('signbackground.jpg');
+	background-image:url('signbackground.jpg');
+	background-position: center center;
 	background-size: auto;
 	background-repeat: no-repeat;
 	width: 6em;
@@ -71,18 +77,13 @@ input {
 	color: white;
 	background-color: purple;
 	padding: 0.6em 0.8em;
-	border-right: 1px solid white;
+	font-family: georgia, serif;
 }
 
-input:hover {
-	background-color: #ff3300;
+input :hover {
+	background-color:transparent;
 }
 
 li {
 	display: inline;
-}
-
-table,th,td {
-	width:100%;
-	border: 1px solid black;
 }

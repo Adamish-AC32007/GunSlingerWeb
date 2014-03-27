@@ -172,4 +172,17 @@ public class GunSlingerModel {
 
 	public void getData(){
 	}
+
+	public boolean addFriend(String name, String friend) {
+		Session session = cluster.connect("playerData");
+		
+		Set<String> sub = new HashSet<String>();
+		sub.add(friend);
+		PreparedStatement statement = session.prepare("update friends set friends = friends + ? where username = ?;");
+		BoundStatement boundStatement = new BoundStatement(statement);
+		session.execute(boundStatement.bind(sub,name));
+		
+		session.close();
+		return true;
+	}
 }
