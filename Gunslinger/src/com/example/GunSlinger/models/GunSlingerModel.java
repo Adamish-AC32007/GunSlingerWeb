@@ -32,7 +32,6 @@ import com.datastax.driver.core.utils.UUIDs;
 import com.example.GunSlinger.lib.*;
 import com.example.GunSlinger.stores.*;
 
-
 public class GunSlingerModel {
 	Cluster cluster;
 	public GunSlingerModel(){
@@ -170,7 +169,32 @@ public class GunSlingerModel {
 		return loggedin;
 	}
 
-	public void getData(){
+	//fully working
+	//finalised
+	public LinkedList<GunSlingerStore> searchUser(String user){		
+		LinkedList<GunSlingerStore> gsList = new LinkedList<GunSlingerStore>();
+		Session session = cluster.connect("playerData"); 
+
+		PreparedStatement statement = session.prepare("select * from data where username = ?");
+		BoundStatement boundStatement = new BoundStatement(statement);
+		ResultSet rs = session.execute(boundStatement.bind(user));
+		if (rs.isExhausted()) { 												
+			System.out.println("No users returned");
+		} else { 																
+			for (Row row : rs) { 												
+				GunSlingerStore nGS = new GunSlingerStore();
+				nGS.setUsername(row.getString("username")); 	
+				nGS.setAccuracy(row.getFloat("accuracy"));
+				nGS.setTotalshots(row.getInt("totalshots"));		
+				nGS.setMeleekills(row.getInt("meleekills"));
+				nGS.setTotalkills(row.getInt("totalkills"));
+				nGS.setHighscore(row.getInt("highscore"));
+				nGS.setPlaytime(row.getUUID("playtime"));						
+				gsList.add(nGS); 
+			}
+		}
+		session.close();
+		return gsList;
 	}
 
 	public boolean addFriend(String name, String friend) {

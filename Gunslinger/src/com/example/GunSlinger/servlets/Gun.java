@@ -102,7 +102,7 @@ public class Gun extends HttpServlet {
 				rd.forward(request, response);
 			}			
 		}
-
+		//view friends leaderboard
 		else if(request.getParameter("friends")!=null)
 		{
 			LinkedList<GunSlingerStore> friendList = gm.getFriendsScore(Name);
@@ -110,6 +110,7 @@ public class Gun extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Friends.jsp");
 			rd.forward(request, response);
 		}
+		//view global leaderboard
 		else if(request.getParameter("global")!=null)
 		{
 			LinkedList<GunSlingerStore> globalList = gm.getGlobalScores();			
@@ -124,6 +125,7 @@ public class Gun extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
+		//tracker page clicked
 		else if(request.getParameter("tracker")!=null)
 		{
 			String url = null;
@@ -133,12 +135,11 @@ public class Gun extends HttpServlet {
 
 			LinkedList<GunSlingerStore> scoreList = gm.getScores(Name);			
 			request.setAttribute("PlayerScores", scoreList);
-
-			gm.getData();
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/Tracker.jsp");
 			rd.forward(request, response);
 		}
+		//add friend button clicked
 		else if(request.getParameter("addFriend")!=null)
 		{
 			String friend = request.getParameter("enterFriend");
@@ -146,6 +147,32 @@ public class Gun extends HttpServlet {
 			gm.addFriend(Name,friend);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/Friends.jsp");
+			rd.forward(request, response);
+		}
+		//search button clicked
+		else if(request.getParameter("enterSearch")!=null)
+		{
+			String search = request.getParameter("searchText");
+			
+			LinkedList<GunSlingerStore> scoreList = gm.searchUser(search);
+			
+			request.setAttribute("PlayerScores", scoreList);
+			if(scoreList==null)
+			{
+				System.out.println("No data recieved from model");
+			}
+			else{
+				System.out.println("Player data found");
+				RequestDispatcher rd = request.getRequestDispatcher("/Main.jsp");
+				rd.forward(request, response);
+			}
+		}
+		//logout button clicked
+		else if(request.getParameter("logout")!=null)
+		{
+			Name=null;
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 			rd.forward(request, response);
 		}
 	}

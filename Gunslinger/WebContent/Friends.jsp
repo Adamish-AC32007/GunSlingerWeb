@@ -27,7 +27,13 @@
 				style="background-image: url('CSS/signbackground.jpg'); background-position: center center; background-size: auto; background-repeat: no-repeat; width: 6em; text-decoration: none; text-align: center; font-size: large; color: white; background-color: purple; padding: 0.6em 0.8em; font-family: georgia, serif;"></li>
 			<li><input value="Tracker" name="tracker" type="submit"
 				style="background-image: url('CSS/signbackground.jpg'); background-position: center center; background-size: auto; background-repeat: no-repeat; width: 6em; text-decoration: none; text-align: center; font-size: large; color: white; background-color: purple; padding: 0.6em 0.8em; font-family: georgia, serif;"></li>
+			<li><input value="Logout" name="logout" type="submit"
+				style="background-image: url('CSS/signbackground.jpg'); background-position: center center; background-size: auto; background-repeat: no-repeat; width: 6em; text-decoration: none; text-align: center; font-size: large; color: white; background-color: purple; padding: 0.6em 0.8em; font-family: georgia, serif;"></li>
 		</ul>
+		<input class="form-control" id="search_bar" name="searchText"
+				placeholder="Search User Name" type="text" maxlength="35"
+				size="45px" autocomplete="off" style="width:10%; left:50px;">
+		<button type="submit" name="enterSearch" class="btn btn-info">Search</button>
 	</form>
 
 	<div>
