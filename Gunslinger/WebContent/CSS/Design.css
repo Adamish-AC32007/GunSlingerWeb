@@ -1,0 +1,88 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-image: url('MainMenu.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+h1 {
+	color: blue;
+}
+
+p {
+	font-weight: bold;
+	color: #000000;
+	background-color: transparent;
+	letter-spacing: 1pt;
+	word-spacing: 3pt;
+	font-size: 18px;
+	text-align: left;
+	font-family: georgia, serif;
+	line-height: 1;
+}
+
+div {
+	background-color: grey;
+	position: relative;
+	top: 100px;
+	left: 50px;
+	height: 500px;
+	width: 600px;
+}
+
+table.hovertable {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+
+table.hovertable th {
+	background-color: #c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+
+table.hovertable tr {
+	background-color: #d4e3e5;
+}
+
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+
+input {
+	float: left;
+	background-image: url('signbackground.jpg');
+	background-size: auto;
+	background-repeat: no-repeat;
+	width: 6em;
+	text-decoration: none;
+	text-align: center;
+	font-size: large;
+	color: white;
+	background-color: purple;
+	padding: 0.6em 0.8em;
+	border-right: 1px solid white;
+}
+
+input:hover {
+	background-color: #ff3300;
+}
+
+li {
+	display: inline;
+}
+
+table,th,td {
+	width:100%;
+	border: 1px solid black;
+}
