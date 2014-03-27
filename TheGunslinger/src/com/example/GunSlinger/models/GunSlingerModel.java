@@ -53,15 +53,15 @@ public class GunSlingerModel {
 		session1.execute("CREATE TABLE if not exists login (username varchar,password varchar, PRIMARY KEY (username))");
 	}
 	
-	public LinkedList<GunSlingerStore> getScores(){
+	public LinkedList<GunSlingerStore> getScores(String name){
 		LinkedList<GunSlingerStore> gsList= new LinkedList<GunSlingerStore>();
 		Session session = cluster.connect("playerData");
 		
-		PreparedStatement statement = session.prepare("SELECT * from data");	//create the cql statement to be executed
+		PreparedStatement statement = session.prepare("SELECT * from data where username=?");	//create the cql statement to be executed
 		BoundStatement boundStatement = new BoundStatement(statement); 			
-		ResultSet rs = session.execute(boundStatement);
+		ResultSet rs = session.execute(boundStatement.bind(name));
 		if (rs.isExhausted()) { 												//if the result set is empty
-			System.out.println("No Tweets returned");
+			System.out.println("No scores returned");
 		} else { 																//else (meaning there is more data)
 			for (Row row : rs) { 												//for each row
 				GunSlingerStore gs = new GunSlingerStore(); 					
@@ -98,4 +98,5 @@ public class GunSlingerModel {
 		session.close();
 		return loggedin;
 	}
+	
 }
