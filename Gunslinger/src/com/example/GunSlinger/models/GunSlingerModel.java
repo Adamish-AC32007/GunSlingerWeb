@@ -16,6 +16,7 @@ package com.example.GunSlinger.models;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -80,7 +81,6 @@ public class GunSlingerModel {
 		return gsList;
 	}
 
-
 	public LinkedList<GunSlingerStore> getGlobalScores(){
 		LinkedList<GunSlingerStore> gsList= new LinkedList<GunSlingerStore>();
 		Session session = cluster.connect("playerData");
@@ -100,7 +100,9 @@ public class GunSlingerModel {
 				gs.setTotalkills(row.getInt("totalkills"));
 				gs.setHighscore(row.getInt("highscore"));
 				gs.setPlaytime(row.getUUID("playtime"));
-				gsList.add(gs); 												
+				gsList.add(gs); 	
+				Collections.sort(gsList,Collections.reverseOrder());
+				System.out.println(gsList);
 			}
 		}
 		session.close();

@@ -1,8 +1,11 @@
 package com.example.GunSlinger.stores;
 
 import java.util.UUID;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-public class GunSlingerStore {
+public class GunSlingerStore implements Comparable<GunSlingerStore>{
 	
 	String username;
 	float accuracy;
@@ -11,6 +14,8 @@ public class GunSlingerStore {
 	int totalkills;
 	int highscore;
 	UUID playtime;
+	
+	String type;
 	
 	public String getUsername(){
 		return username;
@@ -54,6 +59,23 @@ public class GunSlingerStore {
 	}
 	public void setPlaytime(UUID playtime){
 		this.playtime=playtime;
+	}
+	
+	
+	@Override
+	public int compareTo(GunSlingerStore o) {
+		int comparedScore = o.highscore;
+		if (this.highscore > comparedScore) {
+			return 1;
+		} else if (this.highscore == comparedScore) {
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+ 
+	public String toString() {
+		return type;
 	}
 
 }

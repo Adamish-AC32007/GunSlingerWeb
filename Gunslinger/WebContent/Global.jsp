@@ -50,6 +50,7 @@
 			<%
 				List<GunSlingerStore> lGun = (List<GunSlingerStore>) request
 						.getAttribute("GlobalScores");
+		
 				if (lGun == null) {
 			%>
 			<p>No player data found</p>
