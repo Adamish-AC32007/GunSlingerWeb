@@ -151,11 +151,8 @@ public class Gun extends HttpServlet {
 		{
 			String url = null;
 
-			LinkedList<GunSlingerStore> friendList = gm.getFriendsScore(Name);
-			request.setAttribute("FriendsScores", friendList);
-
-			LinkedList<GunSlingerStore> scoreList = gm.getScores(Name);			
-			request.setAttribute("PlayerScores", scoreList);
+			LinkedList<GunSlingerStore> scoreList = gm.getTrackerScores(Name);			
+			request.setAttribute("PlayerTrackerScores", scoreList);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/Tracker.jsp");
 			rd.forward(request, response);

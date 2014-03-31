@@ -74,12 +74,41 @@ public class GunSlingerModel {
 				gs.setTotalkills(row.getInt("totalkills"));
 				gs.setHighscore(row.getInt("highscore"));
 				gs.setPlaytime(row.getUUID("playtime"));
-				gsList.add(gs); 												
+				gsList.add(gs); 					
+				Collections.sort(gsList,Collections.reverseOrder());
 			}
 		}
 		session.close();
 		return gsList;
 	}
+
+
+	public LinkedList<GunSlingerStore> getTrackerScores(String name){
+		LinkedList<GunSlingerStore> gsList= new LinkedList<GunSlingerStore>();
+		Session session = cluster.connect("playerData");
+
+		PreparedStatement statement = session.prepare("SELECT * from data where username=?");	//create the cql statement to be executed
+		BoundStatement boundStatement = new BoundStatement(statement); 			
+		ResultSet rs = session.execute(boundStatement.bind(name));
+		if (rs.isExhausted()) { 												//if the result set is empty
+			System.out.println("No scores returned");
+		} else { 																//else (meaning there is more data)
+			for (Row row : rs) { 				//for each row
+				GunSlingerStore gs = new GunSlingerStore(); 					
+				gs.setUsername(row.getString("username")); 	
+				gs.setAccuracy(row.getFloat("accuracy"));
+				gs.setTotalshots(row.getInt("totalshots"));		
+				gs.setMeleekills(row.getInt("meleekills"));
+				gs.setTotalkills(row.getInt("totalkills"));
+				gs.setHighscore(row.getInt("highscore"));
+				gs.setPlaytime(row.getUUID("playtime"));
+				gsList.add(gs); 					
+			}
+		}
+		session.close();
+		return gsList;
+	}
+
 
 	public LinkedList<GunSlingerStore> getGlobalScores(){
 		LinkedList<GunSlingerStore> gsList= new LinkedList<GunSlingerStore>();
@@ -102,7 +131,6 @@ public class GunSlingerModel {
 				gs.setPlaytime(row.getUUID("playtime"));
 				gsList.add(gs); 	
 				Collections.sort(gsList,Collections.reverseOrder());
-				System.out.println(gsList);
 			}
 		}
 		session.close();
@@ -140,7 +168,8 @@ public class GunSlingerModel {
 							nGS.setTotalkills(row1.getInt("totalkills"));
 							nGS.setHighscore(row1.getInt("highscore"));
 							nGS.setPlaytime(row1.getUUID("playtime"));						
-							gsList.add(nGS); 												
+							gsList.add(nGS); 						
+							Collections.sort(gsList,Collections.reverseOrder());
 						}
 					}
 				}
@@ -170,15 +199,15 @@ public class GunSlingerModel {
 		session.close();
 		return loggedin;
 	}
-	
-	
+
+
 	public boolean Register(String name, String password) {
 		boolean found=false;
 		Session session = cluster.connect("playerData");
-		
+
 		PreparedStatement searchStatement = session.prepare("SELECT * from login where username = ?");
 		ResultSet SearchRS = session.execute(searchStatement.bind(name));
-			
+
 		if(SearchRS.isExhausted())
 		{
 			// username doesnt already exist
@@ -226,13 +255,13 @@ public class GunSlingerModel {
 
 	public boolean addFriend(String name, String friend) {
 		Session session = cluster.connect("playerData");
-		
+
 		Set<String> sub = new HashSet<String>();
 		sub.add(friend);
 		PreparedStatement statement = session.prepare("update friends set friends = friends + ? where username = ?;");
 		BoundStatement boundStatement = new BoundStatement(statement);
 		session.execute(boundStatement.bind(sub,name));
-		
+
 		session.close();
 		return true;
 	}

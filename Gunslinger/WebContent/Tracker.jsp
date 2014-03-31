@@ -27,7 +27,7 @@
 </form>
 <%
 				int [] highscores = new int [10]; 
-				List<GunSlingerStore> lGun = (List<GunSlingerStore>) request.getAttribute("PlayerScores");
+				List<GunSlingerStore> lGun = (List<GunSlingerStore>) request.getAttribute("PlayerTrackerScores");
 				if (lGun == null) {
 			%>
 <p>No player data found</p>
